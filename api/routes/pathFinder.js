@@ -1,4 +1,7 @@
 const express = require("express");
+const multer = require('multer');
+
+const photosMiddleware = multer({dest: 'uploads'});
 
 const {
   handleUserRegister,
@@ -20,6 +23,9 @@ const {
   handleGetUserBookings,
 } = require("../controllers/Booking");
 
+const { handleUploadLocalFile, handleUploadByLink } = require("../controllers/PhotoUploader");
+
+
 const router = express.Router();
 
 router.post("/user/register", handleUserRegister);//done
@@ -35,5 +41,8 @@ router.put("/user/places", handleUpdatePlace); // done
 
 router.post("/user/bookings", handleUserBookings); // done
 router.get("/user/bookings", handleGetUserBookings); // done
+
+router.post("/upload-by-link", handleUploadByLink);
+router.post("/upload" , photosMiddleware.array('photos',100), handleUploadLocalFile);
 
 module.exports = router;
