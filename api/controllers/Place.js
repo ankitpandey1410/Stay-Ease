@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const jwtSecret = process.env.JWT_SECRET;
 
-async function handleGetPlaces(req, res) {
+async function handleGetPlaces(_, res) {
   try {
     res.json(await Place.find());
   } catch (error) {

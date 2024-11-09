@@ -86,7 +86,7 @@ async function handleUserLogIn(req, res) {
   }
 }
 
-async function handleUserLogOut(req, res) {
+async function handleUserLogOut(_, res) {
   try {
     return res.status(200).cookie("token", "").json({
       message: "User logged out successfully!",
